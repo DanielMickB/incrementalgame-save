@@ -43,6 +43,7 @@ public class UserDataManager{
         string json = JsonUtility.ToJson (Progress);
 
         PlayerPrefs.SetString (PROGRESS_KEY, json);
+        Debug.Log("saved");
 
     }
     public static bool HasResources (int index)

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
+
     public static GameManager Instance
     {
         get
@@ -41,7 +42,8 @@ public class GameManager : MonoBehaviour
     private void Start ()
     {
         AddAllResources ();
-        GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString ("0") }";
+        Debug.Log(UserDataManager.Progress.Gold.ToString("0"));
+        GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString("0") }";
     }
 
     private void Update ()
@@ -126,13 +128,19 @@ public class GameManager : MonoBehaviour
         output *= AutoCollectPercentage;
         // Fungsi ToString("F1") ialah membulatkan angka menjadi desimal yang memiliki 1 angka di belakang koma
         AutoCollectInfo.text = $"Auto Collect: { output.ToString ("F1") } / second";
-
+        Debug.Log(output);
         AddGold (output);
     }
 
     public void AddGold (double value)
     {
-        TotalGold += value;
+        
+        Debug.Log("dapet:"+value);
+        
+        //TotalGold += value;
+        UserDataManager.Progress.Gold+=value;
+        Debug.Log("total gold"+TotalGold);
+        Debug.Log("total gold tersave"+UserDataManager.Progress.Gold.ToString ("0"));
         GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString ("0") }";
 
         UserDataManager.Save ();//ngesave data
